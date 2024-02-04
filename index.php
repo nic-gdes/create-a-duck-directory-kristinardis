@@ -4,7 +4,9 @@
 <body>
     <?php include 'components/nav.php'; ?>
     <main>
-    <?php echo '<p>Home Page</p>'; ?>
+   
+    <h1>Welcome to the world of ducks and their favorite  things!</h1>
+    
 <div class="grid-container">
 
     
