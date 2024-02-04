@@ -1,14 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duck Form</title>
-</head>
+<?php include 'components/head.php'; ?>
 <body>
-<?php include 'components/nav.php'; ?>
+    <?php include 'components/nav.php'; ?>
     <?php
   
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,11 +15,12 @@
 
      
         echo "<h2>Submitted Duck Information</h2>";
-        echo "<p><strong>Duck Name:</strong> $duck_Name</p>";
-        echo "<p><strong>Favorite Foods:</strong> $favorite_foods</p>";
-        echo "<p><strong>Duck Image:</strong> $duck_image</p>";               ?????????????????/
+        echo "<p><strong>Duck Name:</strong> $duckName</p>";
+        echo "<p><strong>Favorite Foods:</strong> $favoriteFoods</p>";
+        echo "<p><strong>Duck Image:</strong> $duckImage</p>";
         echo "<p><strong>Biography:</strong> $biography</p>";
-    }
+    } else {
+
     ?>
 
     <form action="create-duck.php" method="POST" enctype="multipart/form-data">
@@ -34,16 +29,19 @@
         <input type="text" id="duck_name" name="duck_name" required>
 
         <label for="favorite_foods">Favorite Foods:</label>
-        <itextarea id="favorite_foods" name="favorite_foods" rows="5" required>
+        <textarea id="favorite_foods" name="favorite_foods" rows="5" required></textarea>
 
         <label for="duck_image">Duck Image:</label>
-        <input type="file" id="duck_image" name="duck_image" accept="image/*" required>     ????????????
+        <input type="file" id="duck_image" name="duck_image" accept="image/*" required>
 
         <label for="biography">Biography:</label>
         <textarea id="biography" name="biography" rows="15" required></textarea>
 
         <button type="submit">Submit</button>
     </form>
+
+    <?php } ?>
+    
     <?php include 'components/footer.php'; ?>
 
 </body>
