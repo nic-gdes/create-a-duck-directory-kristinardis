@@ -37,6 +37,17 @@ if (isset($_POST['submit'])) {
             }
             if (!array_filter($errors)) {
             } else {
+                
+                //connect to db
+                require('./config/db.php');
+                //build sql query
+                $sql = "INSERT INTO ducks(name, favorite_foods, biography) VALUES ('$name', '$favorite_foods', '$bio')";
+               
+
+                //exwcute query in mysql
+                mysqli_query($conn, $sql);
+
+                //load home page
                 header("Location: ./index.php");
             }
         }
