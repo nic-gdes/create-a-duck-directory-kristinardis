@@ -3,56 +3,64 @@
 if (isset($_POST['submit'])) {
 
     // create error array
-    $errors = array(
-        "name" => "",
-        "favorite_foods" => "",
-        "bio" => "",
-    );
+    $errors = ["name" => '', "favorite_foods" => '', "bio" => ''];
+
 
     $name = htmlspecialchars($_POST["name"]);
     $favorite_foods = htmlspecialchars($_POST["favorite_foods"]);
-    $bio = htmlspecialchars($_POST["bio"]);
+    $bio = htmlspecialchars($_POST"bio"]);
 
 
     if (empty($name)) {
-        $errors['name'] = 'The name is required';
+        $errors["name"] = 'A name is required';
     } else {
-        if (preg_match('/^[a-z,\s]+$/1', $name)) {
-            $errors['name'] = 'The name has illegal characters';
-        }
-
-        if (empty($favorite_foods)) {
-            $errors['favorite_foods'] = 'No favorite foods>  You are hungry';
-        } else {
-            if (preg_match('/^[a-z,\s]+$/1', $favorite_foods)) {
-                $errors['favorite_foods'] = 'Favorite foods must be a comma separated list';
-            }
-
-            if (empty($bio)) {
-                $errors['bio'] = 'You must have a bio';
-            }
-
-            if (preg_match('/^[a-z,\s]+$/1', $bio)) {
-                $errors['bio'] = 'Bio must be a string';
-            }
-            if (!array_filter($errors)) {
-            } else {
-                
-                //connect to db
-                require('./config/db.php');
-                //build sql query
-                $sql = "INSERT INTO ducks(name, favorite_foods, biography) VALUES ('$name', '$favorite_foods', '$bio')";
-               
-
-                //exwcute query in mysql
-                mysqli_query($conn, $sql);
-
-                //load home page
-                header("Location: ./index.php");
-            }
+        if (preg_match('/^[a-z,\s]+$/i', $name)) {
+            $errors["name"] = 'The name has illegal characters';
         }
     }
-}
+        if (empty($favorite_foods)) {
+            $errors["favorite_foods"] = "You are hungry";
+        } else {
+            if (!preg_match('/^[a-z,\s]+$/i', $favorite_foods)) {
+                $errors["favorite_foods"] = 'Favorite foods must be a comma separated list';
+            }
+        }
+            if (empty($bio)) {
+                $errors["bio"] = 'You must have a bio';
+            }
+
+            //if (preg_match('/^[a-z,\s]+$/i', $bio)) {
+               // $errors['bio'] = 'Bio must be a string';
+           // }
+            if (!array_filter($errors)) {
+           //  form is valid
+                echo "submitted successfully";    
+                ?>
+
+                //connect to db
+                <?php
+
+                require("./config/db.php");
+                //build sql query
+
+                $sql = "INSERT INTO ducks(name, favorite_foods, bio) VALUES ("$name", "$favorite_foods", "$bio")";
+               
+
+                //execute query in mysql
+                mysqli_query($conn, $sql);
+
+               
+
+                //load home page
+                
+                header("Location:index.php");
+
+            } else {
+                //if there are any errors
+                echo "errors in the form: ";
+            }   
+
+        }
 
 ?>
 
