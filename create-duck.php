@@ -20,7 +20,7 @@
         $bio = htmlspecialchars($_POST["biography"]);
         $nameMatch = preg_match('/^[a-z0-9\s]+$/i', $name);
         $favoriteFoodsMatch = preg_match('/^[a-z0-9\s]+$/i', $favorite_foods);
-        $bioMatch = preg_match('/^[a-z0-9\s]+$/i', $bio);
+        $bioMatch = preg_match('/^[\x00-\x7F]+$/i', $bio);
     
         if (empty($name)) {
             $errors["name"] = 'A name is required';
@@ -55,7 +55,7 @@
             if ($conn->query($sql) === TRUE) {
                 echo "Duck created successfully!";
                 $showForm = false;
-                header("Location:index.php");
+                echo " <script> location.replace('index.php'); </script>";
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }

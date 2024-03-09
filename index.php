@@ -31,7 +31,7 @@ mysqli_close($conn);
            <div class="card">
            <div class="card-image"><img src="get-image.php?id=<?php echo $duck["id"] ?>" width="200" height="200"></div>
                     <div class="content"></div>
-                        <h2><?php echo $duck["name"]; ?></h2>
+                        <h2><a href="profile.php?id=<?php echo $duck["id"] ?>"><?php echo $duck["name"]; ?></a></h2>
                         
                         <p><strong>Favorite Foods:</strong></p>
                         <p><?php echo $duck["favorite_foods"]; ?></p>
