@@ -13,7 +13,7 @@ include 'components/nav.php';
 
 if (isset($_GET['id'])) {
     $id = htmlspecialchars($_GET['id']);
-    $sql = "SELECT name, favorite_foods, biography, image FROM ducks WHERE id=$id";
+    $sql = "SELECT id, name, favorite_foods, biography, image FROM ducks WHERE id=$id";
     $result = mysqli_query($conn, $sql);
     $duck = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
@@ -50,15 +50,19 @@ if (isset($_GET['id'])) {
     <?php include 'components/head.php'; ?>
 
     <main>
-        <?php if ($duck_is_live): ?>
+        <h1>Welcome to the world of ducks and their favorite things!</h1>
+    <?php if ($duck_is_live): ?>
             <section class="profile">
+                <h3>profile content goes here</h3>
             </section>
 
         <?php else: ?>
-            <section class="no duck">
-                <h1>Sorry, no duck found</h1>
+            <section class="no-duck">
+                <h3>Sorry, no duck found</h3>
             </section>
         <?php endif; ?>
+        
+
 
         <div class="grid-container">
             <div class="grid-item">
@@ -69,13 +73,25 @@ if (isset($_GET['id'])) {
             <div class="grid-item">
                 <h2>My Favorite Foods</h2>
                 <p>
-                    <?php echo $duck['favorite_foods']; ?>
+                    <?php
+                    if (isset($duck['favorite_foods'])) {
+                        echo $duck['favorite_foods'];
+                    } else {
+                        echo "Favorite foods not available";
+                    }
+                    ?>
                 </p>
             </div>
             <div class="grid-item">
                 <h2>Biography</h2>
                 <p>
-                    <?php echo $duck['biography']; ?>
+                    <?php
+                    if (isset($duck['biography'])) {
+                        echo $duck['biography'];
+                    } else {
+                        echo "Biography not available";
+                    }
+                    ?>
                 </p>
             </div>
         </div>
